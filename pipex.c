@@ -6,35 +6,24 @@
 /*   By: aaoutem- <aaoutem-@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 11:48:57 by aaoutem-          #+#    #+#             */
-/*   Updated: 2023/01/29 14:48:27 by aaoutem-         ###   ########.fr       */
+/*   Updated: 2023/02/01 15:53:05 by aaoutem-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-/*void	first_process(int fd, char *cmd1, char *envp[])
-{
-	char	*cmd_path;
-	char	**p;
-
-	p = ft_split(cmd1, ' ');
-	cmd_path = path(p[0], envp);
-	if (!cmd_path)
-		errors(4);
-	dup2(fd, STDOUT_FILENO);
-	execve(cmd_path, p, envp);
-}*/
-
 void	errors(int a)
 {
 	if (a == 1)
-		write(STDERR_FILENO, "\033[1;31mERROR:pipe failed", 12);
+		write(STDERR_FILENO, "\033[1;31mERROR:pipe failed\n", 25);
 	else if (a == 2)
-		write(STDERR_FILENO, "\033[1;31mERROR:files failed at opening", 30);
+		write(STDERR_FILENO, "\033[1;31mERROR:files failed at opening\n", 37);
 	else if (a == 3)
-		write(STDERR_FILENO, "\033[1;31mERROR:fork failed", 12);
+		write(STDERR_FILENO, "\033[1;31mERROR:fork failed\n", 25);
 	else if (a == 4)
-		write(STDERR_FILENO, "c\033[1;31mERROR:ommand not found", 16);
+		write(STDERR_FILENO, "\033[1;31mERROR:command not found\n", 31);
+	else if (a == 5)
+		write(STDERR_FILENO, "\033[1;31mERROR:execution failed\n", 29);
 	exit(1);
 }
 
@@ -47,7 +36,6 @@ void	execute(char *cmd, char *envp[])
 	cmd_path = path(p[0], envp);
 	if (!cmd_path)
 		errors(4);
-	// dup2(fd, STDIN_FILENO);
 	execve(cmd_path, p, envp);
 }
 
@@ -76,10 +64,12 @@ void	processes(int fds[], char *av[], char *envp[])
 int	main(int ac, char *av[], char *envp[])
 {
 	int		i;
-	ppx_t	varbs_t;
+	t_ppx	varbs_t;
 
 	if (ac == 5)
 	{
+		if (!envp[0] || !envp)
+			errors(4);
 		varbs_t.fdinf = open(av[1], O_RDWR);
 		varbs_t.fdoutf = open(av[4], O_RDWR | O_CREAT | O_TRUNC, 0644);
 		if (varbs_t.fdinf < 0 || varbs_t.fdinf < 0)
@@ -90,8 +80,8 @@ int	main(int ac, char *av[], char *envp[])
 		if (i == -1)
 			errors(1);
 		processes(varbs_t.fds, av, envp);
-		return(0);
+		errors(5);
 	}
-	write(STDERR_FILENO, "\033[1;31mERROR:incompatible numbre of argmnts:", 39);
+	write(STDERR_FILENO, "\033[1;31mERROR:incompatible numbre of argmnts", 43);
 	exit(1);
 }

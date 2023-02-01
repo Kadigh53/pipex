@@ -1,39 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaoutem- <aaoutem-@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/26 17:09:00 by aaoutem-          #+#    #+#             */
-/*   Updated: 2023/01/31 15:06:00 by aaoutem-         ###   ########.fr       */
+/*   Created: 2022/11/10 20:57:56 by aaoutem-          #+#    #+#             */
+/*   Updated: 2023/01/31 14:53:00 by aaoutem-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-# define PIPEX_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include <fcntl.h>
-# include <errno.h>
+# include <stdio.h>
+# include <string.h>
 
-size_t	ft_strlen(char *s);
-char	**ft_split(char *s, char c);
-char	*ft_strjoin(char *s1, char *s2);
-char	*ft_strstr(char *haystack, char *needle);
-char	*ft_substr(char *s, unsigned int start, size_t len);
-char	*absolute_path(char **p, char *cmd);
-char	*absolute_path(char **p, char *cmd);
-char	*path(char *cmd, char *envp[]);
+char	*get_next_line(int fd);
+size_t	ft_strlen_gnl(char *s);
+int		a_newline(char *s);
+char	*ft_substr_gnl(char *s, unsigned int start, size_t len);
+char	*ft_strjoin_gnl(char *s1, char *s2);
+char	*ft_strdup(char *s1);
 
-typedef struct t_pipex
-{
-	int	fdinf;
-	int	fdoutf;
-	int	fds[2];
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
-}	t_ppx;
+# ifndef FDMAX
+#  define FDMAX 10240
+# endif
 
 #endif

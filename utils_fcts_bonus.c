@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_fcts.c                                       :+:      :+:    :+:   */
+/*   utils_fcts_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aaoutem- <aaoutem-@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/30 10:58:03 by aaoutem-          #+#    #+#             */
-/*   Updated: 2023/02/01 12:43:37 by aaoutem-         ###   ########.fr       */
+/*   Created: 2023/01/30 22:46:27 by aaoutem-          #+#    #+#             */
+/*   Updated: 2023/02/01 12:50:59 by aaoutem-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "pipex_bonus.h"
 
 char	*absolute_path(char **p, char *cmd)
 {
@@ -38,9 +38,11 @@ char	*path(char *cmd, char *envp[])
 {
 	int		i;
 	char	**p;
+	int		ret;
 	char	*str;
 
 	i = 0;
+	ret = 1;
 	p = NULL;
 	while (envp && envp[i] != NULL)
 	{
